@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List with Light & Dark Mode</title>
+    <!-- Import Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Import FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom animations */
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            0% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+        }
+
+        .task-added {
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        .task-deleted {
+            animation: fadeOut 0.5s ease forwards;
+        }
+
+        .task:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #ef4444;
+        }
+
+        /* Theme-specific styling */
+        body{
+            background-color: rgb(7 89 133);
+        }
+        body.dark {
+            background-color: #1a202c; /* Dark mode background */
+            color: white; /* Dark mode text */
+        }
+
+        body.light {
+            background-color: #f7fafc; /* Light mode background */
+            color: black; /* Light mode text */
+        }
+
+        .dark .bg-white {
+            background-color: #2d3748 !important; /* Dark mode for the to-do list container */
+        }
+
+        .dark .bg-gray-200 {
+            background-color: #4a5568 !important; /* Dark mode for task backgrounds */
+        }
+
+        .dark .border-gray-300 {
+            border-color: #a0aec0 !important; /* Dark mode for input borders */
+        }
+
+        .dark .focus\:ring-blue-500 {
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+        }
+
+        /* For smooth theme transitions */
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="light flex justify-center items-center h-screen transition-colors">
+    <div class="bg-white dark:bg-gray-900 dark:text-white shadow-lg rounded-lg p-6 w-96 transition-all">
+        <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-bold mb-4 text-center">To-Do List</h1>
+            <!-- Theme toggle button with icons -->
+            <button id="theme-toggle" class="p-2 rounded">
+                <i id="theme-icon" class="fas fa-sun text-yellow-500 text-2xl"></i>
+            </button>
+        </div>
+        <div class="mb-4">
+            <input id="todo-input" type="text" placeholder="Add a new task"
+                   class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <button id="add-btn" class="bg-blue-500 text-white px-4 py-2 rounded w-full hover:bg-blue-600 transition">
+            Add Task
+        </button>
+        <ul id="todo-list" class="mt-4 space-y-2"></ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>  
